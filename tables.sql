@@ -1,18 +1,24 @@
-CREATE DATABASE Westrom;
+/******************************
+ * Author:  Julian Bunch
+ * Project: TasksWebApp
+ * Date:    06/22/2021
+ ******************************/
 
-CREATE TABLE Projects {
+CREATE DATABASE TasksWebApp;
+
+CREATE TABLE Projects (
     ProjectID INT NOT NULL AUTO_INCREMENT,
     ProjectName VARCHAR(50) NOT NULL,
     CONSTRAINT PK_Projects PRIMARY KEY(ProjectID)
-} Engine = InnoDB CHARACTER SET = utf8 COLLATE = utf8_bin;
+ ) Engine = InnoDB CHARACTER SET = utf8 COLLATE = utf8_bin;
 
-CREATE TABLE Contributors {
+CREATE TABLE Contributors (
     ContributorID INT NOT NULL AUTO_INCREMENT,
     ContributorName VARCHAR(50) NOT NULL,
     CONSTRAINT PK_Contributors PRIMARY KEY(ContributorID)
-} Engine = InnoDB CHARACTER SET = utf8 COLLATE = utf8_bin;
+ ) Engine = InnoDB CHARACTER SET = utf8 COLLATE = utf8_bin;
 
-CREATE TABLE Tasks {
+CREATE TABLE Tasks (
     TaskID INT NOT NULL AUTO_INCREMENT,
     ProjectID INT NOT NULL,
     ContributorID INT,
@@ -23,4 +29,4 @@ CREATE TABLE Tasks {
     CONSTRAINT PK_Tasks PRIMARY KEY(TaskID),
     CONSTRAINT FK_Tasks_ProjectID FOREIGN KEY(ProjectID) REFERENCES Projects(ProjectID),
     CONSTRAINT FK_Tasks_ContributorID FOREIGN KEY(ContributorID) REFERENCES Contributors(ContributorID)
-} Engine = InnoDB CHARACTER SET = utf8 COLLATE = utf8_bin;
+ ) Engine = InnoDB CHARACTER SET = utf8 COLLATE = utf8_bin;
