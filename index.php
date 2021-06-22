@@ -7,39 +7,7 @@ Date:    06/22/2021
 -->
 
 <?php
-    //phpinfo();
-    $dbhost = "localhost";
-    $dbuser = "root";
-    $dbpass = "";
-    $dbname = "TasksWebApp";
-
-    // Connect to database
-    $conn = new PDO("mysql:host=$dbhost;dbname=$dbname", $dbuser, $dbpass);
-
-    // Executes a query without prepared statement or input sanitization
-    function query($query) {
-        global $conn;
-        $result = $conn -> prepare($query);
-        $result -> execute();
-        return $result;
-    }
-
-    // Adds a project to DB from "project-name"
-    if ($_REQUEST['project-name']) {
-        $pname = $_REQUEST['project-name'];
-        $stmt = $conn -> prepare("INSERT INTO Projects (ProjectName) VALUES (:pname)");
-        $stmt -> bindParam(':pname', $pname, PDO::PARAM_STR);
-        $stmt -> execute();
-    }
-
-    // Add a contributor to DB from "contributor-name"
-    if ($_REQUEST['contributor-name']) {
-        $cname = $_REQUEST['contributor-name'];
-        $stmt = $conn -> prepare("INSERT INTO Contributors (ContributorName) VALUES (:cname)");
-        $stmt -> bindParam(':cname', $cname, PDO::PARAM_STR);
-        $stmt -> execute();
-    }
-
+    include 'config.php';
 ?>
 
 <html>
@@ -52,28 +20,51 @@ Date:    06/22/2021
         <h1>Tasks Web App</h1>
 
         <h3>Add a Project</h3>
-        <form action="/WestromSoftware/index.php">
+        <form action="/WestromSoftware/config.php">
             <label for="project-name">Project Name:</label><br>
             <input type="text" id="project-name" name="project-name" placeholder="Enigma Decrypter">
             <input type="submit" value="Add Project">
         </form>
         
         <h3>Add a Contributor</h3>
-        <form action="/WestromSoftware/index.php">
+        <form action="/WestromSoftware/config.php">
             <label for="contributor-name">Contributor Name:</label><br>
             <input type="text" id="contributor-name" name="contributor-name" placeholder="Alan Turing">
             <input type="submit" value="Add Contributor">
         </form>
 
         <h3>Add a New Task</h3>
-        <form action="/WestromSoftware/index.php">
+        <form action="/WestromSoftware/config.php">
+            <label for="task-project">Project:</label><br>
+            <select id="task-project" name="task-project">
+                <?php
+                    // Print options to be displayed in dropdown menu
+                    $result = query("SELECT * FROM Projects;");
+                    while ($row = $result -> fetch()) {
+                        $pid = $row['ProjectID'];
+                        $pname = $row['ProjectName'];
+                        print "<option value=\"$pid\">$pname</option>";
+                    }
+                ?>
+            </select><br><br>
+            <label for="task-contributor">Contributor (optional):</label><br>
+            <select id="task-contributor" name="task-contributor">
+            <option value=0></option> <!-- Empty option -->
+                <?php
+                    // Print options to be displayed in dropdown menu
+                    $result = query("SELECT * FROM Contributors;");
+                    while ($row = $result -> fetch()) {
+                        $cid = $row['ContributorID'];
+                        $cname = $row['ContributorName'];
+                        print "<option value=$cid>$cname</option>";
+                    }
+                ?>
+            </select><br><br>
             <label for="task-name">Task Name:</label><br>
             <input type="text" id="task-name" name="task-name" placeholder="Make blueprint"><br><br>
-            <label for="task-name">Description:</label><br>
-            <textarea type="text" id="task-desc" name="task-desc" placeholder="Make a detailed drawing on the blue paper"></textarea><br><br>
-            
-
-
+            <label for="task-desc">Description:</label><br>
+            <textarea type="text" id="task-desc" name="task-desc" placeholder="Make a detailed drawing, paper must be blue. "></textarea><br><br>
+            <input type="submit" value="Add Task">
         </form>
 
         <h3>Tasks</h3>
