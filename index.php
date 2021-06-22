@@ -59,7 +59,7 @@ Date:    06/22/2021
                             </select><br><br>
                             <label for="task-contributor">Contributor (optional):</label><br>
                             <select id="task-contributor" name="task-contributor">
-                            <option value=0></option> <!-- Empty option -->
+                                <option value=0>Not Assigned</option> <!-- Empty option -->
                                 <?php
                                     // Print options to be displayed in dropdown menu
                                     $result = query("SELECT * FROM Contributors;");
@@ -122,12 +122,5 @@ Date:    06/22/2021
                 </div>
             </div>
         </div>
-
-
     </body>
-
-
-
-
-
 </html>

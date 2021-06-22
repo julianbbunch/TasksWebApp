@@ -33,7 +33,7 @@
                     </select><br><br>
                     <label for="task-contributor">Contributor (optional):</label><br>
                     <select id="task-contributor" name="task-contributor">
-                    <option value=0></option> <!-- Empty option -->
+                        <option value=0>Not Assigned</option> <!-- Empty option -->
                         <?php
                             // Print options to be displayed in dropdown menu
                             $result = query("SELECT * FROM Contributors;");
@@ -48,9 +48,14 @@
                     <input type="text" id="task-name" name="task-name" placeholder="Make blueprint"><br><br>
                     <label for="task-desc">Description:</label><br>
                     <textarea type="text" id="task-desc" name="task-desc" placeholder="Make a detailed drawing, paper must be blue. "></textarea><br><br>
-                    <input type="submit" value="Add Task">
+                    <label for="task-status">Status</label><br>
+                    <select id="task-status" name="task-status">
+                        <option value="NEW">NEW: Not Started</option>
+                        <option value="PRO">PRO: In Progress</option>
+                        <option value="COM">COM: Completed</option>
+                    </select><br><br>
+                    <input type="submit" value="Update Task">
                 </form>
-
             </div>
         </div>
     </body>
