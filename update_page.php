@@ -20,7 +20,7 @@
         <div class="content">
             <div class="box">
                 <h1>Update Task:</h1>
-                <form action="/WestromSoftware/update.php" method="post">
+                <form action="/update.php" method="post">
                     <input type="hidden" id="task-id" name="task-id" value=<?php echo "$tid";?>/>
                     <label for="task-project">Project:</label><br>
                     <select id="task-project" name="task-project">

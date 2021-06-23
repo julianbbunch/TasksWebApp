@@ -27,7 +27,7 @@ Date:    06/22/2021
                     <!--  Adding Projects  -->
                     <div class="box">
                         <h3>Add a Project</h3>
-                        <form action="/WestromSoftware/insert.php" method="post">
+                        <form action="/insert.php" method="post">
                             <label for="project-name">Project Name:</label><br>
                             <input type="text" id="project-name" name="project-name" placeholder="Enigma Decrypter" autocomplete="off">
                             <input type="submit" value="Add Project">
@@ -38,7 +38,7 @@ Date:    06/22/2021
                     <!--  Adding Contributors  -->
                     <div class="box">
                         <h3>Add a Contributor</h3>
-                        <form action="/WestromSoftware/insert.php" method="post">
+                        <form action="/insert.php" method="post">
                             <label for="contributor-name">Contributor Name:</label><br>
                             <input type="text" id="contributor-name" name="contributor-name" placeholder="Alan Turing" autocomplete="off">
                             <input type="submit" value="Add Contributor">
@@ -49,7 +49,7 @@ Date:    06/22/2021
                     <!--  Adding Tasks  -->
                     <div class="box">
                         <h3>Add a New Task</h3>
-                        <form action="/WestromSoftware/insert.php" method="post">
+                        <form action="/insert.php" method="post">
                             <label for="task-project">Project:</label><br>
                             <select id="task-project" name="task-project">
                                 <?php
@@ -91,22 +91,22 @@ Date:    06/22/2021
                         <?php
                             // Add link to show/hide completed tasks
                             if ($_GET['hide'] == 'true') {
-                                print "<a href=\"/WestromSoftware/index.php?\">Show Completed Tasks</a>";
+                                print "<a href=\"/index.php?\">Show Completed Tasks</a>";
                             }
                             else {
-                                print "<a href=\"/WestromSoftware/index.php?hide=true\">Hide Completed Tasks</a>";
+                                print "<a href=\"/index.php?hide=true\">Hide Completed Tasks</a>";
                             }
                         ?>
                         <br><br>
                         <table>
                             <tr>
-                                <th><a href="/WestromSoftware/index.php?sort=id">Task ID</a></th>
-                                <th><a href="/WestromSoftware/index.php?sort=project">Project</a></th>
-                                <th><a href="/WestromSoftware/index.php?sort=contributor">Contributor</a></th>
+                                <th><a href="/index.php?sort=id">Task ID</a></th>
+                                <th><a href="/index.php?sort=project">Project</a></th>
+                                <th><a href="/index.php?sort=contributor">Contributor</a></th>
                                 <th id="table-col-name">Name</th>
                                 <th id="table-col-description">Description</th>
-                                <th><a href="/WestromSoftware/index.php?sort=status">Status</a></th>
-                                <th id="table-col-date"><a href="/WestromSoftware/index.php?sort=date">Added</a></th>
+                                <th><a href="/index.php?sort=status">Status</a></th>
+                                <th id="table-col-date"><a href="/index.php?sort=date">Added</a></th>
                                 <th>Actions</th>
                             </tr>
                             <?php
@@ -155,8 +155,8 @@ Date:    06/22/2021
                                     <td>$tdesc</td>
                                     <td>$tstatus</td>
                                     <td>$tdate</td>
-                                    <td><a href="/WestromSoftware/update_page.php?task-id=$tid">Update</a>
-                                    <a href="/WestromSoftware/delete.php?task-id=$tid">Delete</a></td></tr>
+                                    <td><a href="/update_page.php?task-id=$tid">Update</a>
+                                    <a href="/delete.php?task-id=$tid">Delete</a></td></tr>
                                     EOF;
                                 }
                             ?>

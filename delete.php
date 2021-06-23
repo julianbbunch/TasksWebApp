@@ -9,5 +9,5 @@
         $stmt -> execute();
     }
 
-    header('location: /WestromSoftware/index.php');
+    header('location: /index.php');
 ?>

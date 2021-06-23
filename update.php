@@ -24,6 +24,6 @@
         $stmt -> bindParam(':tid', $tid, PDO::PARAM_INT);
         $stmt -> execute();
 
-        header('location: /WestromSoftware/index.php');
+        header('location: /index.php');
     }
 ?>

@@ -7,7 +7,7 @@
         $stmt = $conn -> prepare("INSERT INTO Projects (ProjectName) VALUES (:pname)");
         $stmt -> bindParam(':pname', $pname, PDO::PARAM_STR);
         $stmt -> execute();
-        header('location: /WestromSoftware/index.php');
+        header('location: /index.php');
     }
 
     // Add a contributor to DB from "contributor-name"
@@ -16,7 +16,7 @@
         $stmt = $conn -> prepare("INSERT INTO Contributors (ContributorName) VALUES (:cname)");
         $stmt -> bindParam(':cname', $cname, PDO::PARAM_STR);
         $stmt -> execute();
-        header('location: /WestromSoftware/index.php');
+        header('location: /index.php');
     }
 
     // Add a task to project if all required fields have been filled in
@@ -38,8 +38,8 @@
         $stmt -> bindParam(':tdesc', $tdesc, PDO::PARAM_STR);
         $stmt -> execute();
 
-        header('location: /WestromSoftware/index.php');
+        header('location: /index.php');
     }
     print "Please remember to fill in required fields.";
-    print "<br><a href=\"/WestromSoftware/index.php?\">Back</a>";
+    print "<br><a href=\"/index.php?\">Back</a>";
 ?>
