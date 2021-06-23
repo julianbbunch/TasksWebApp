@@ -1,62 +1,29 @@
-<!DOCTYPE html>
-
 <?php
     include 'config.php';
+    
+    // Only update the Task if the required fields are entered
+    if ($_POST['task-project'] && $_POST['task-name'] && $_POST['task-desc']) {
+        $pid = $_POST['task-project'];
+        $cid = NULL;
+        // Contributor is optional, checks if specified
+        if (0 != $_POST['task-contributor']) {
+            $cid = $_POST['task-contributor'];
+        } 
+        $tname = $_POST['task-name'];
+        $tdesc = $_POST['task-desc'];
+        $tstatus = $_POST['task-status'];
+        $tid = $_POST['task-id'];
 
-    $tid = $_REQUEST['tid'];
-    $autoFill = $conn -> prepare("SELECT * FROM Tasks WHERE TaskID = :tid");
-    $autoFill -> bindParam(':tid', $tid, PDO::PARAM_INT);
-    $autoFill -> execute();
+        $stmt = $conn -> prepare("UPDATE Tasks SET ProjectID = :pid, ContributorID = :cid,
+             TaskName = :tname, TaskDescription = :tdesc, TaskStatus = :tstatus WHERE TaskID = :tid");
+        $stmt -> bindParam(':pid', $pid, PDO::PARAM_INT);
+        $stmt -> bindParam(':cid', $cid, PDO::PARAM_INT);
+        $stmt -> bindParam(':tname', $tname, PDO::PARAM_STR);
+        $stmt -> bindParam(':tdesc', $tdesc, PDO::PARAM_STR);
+        $stmt -> bindParam(':tstatus', $tstatus, PDO::PARAM_STR);
+        $stmt -> bindParam(':tid', $tid, PDO::PARAM_INT);
+        $stmt -> execute();
+
+        header('location: /WestromSoftware/index.php');
+    }
 ?>
-
-<html>
-    <head>
-        <title>Web Developer Skills Assessment</title>
-        <link href="styles.css" rel="stylesheet" type="text/css">
-    </head>
-    <body>
-        <div class="cont">
-            <div class="box">
-                <h1>Update Task:</h1>
-                <form action="/WestromSoftware/config.php">
-                    <label for="task-project">Project:</label><br>
-                    <select id="task-project" name="task-project">
-                        <?php
-                            // Print options to be displayed in dropdown menu
-                            $result = query("SELECT * FROM Projects;");
-                            while ($row = $result -> fetch()) {
-                                $pid = $row['ProjectID'];
-                                $pname = $row['ProjectName'];
-                                print "<option value=\"$pid\">$pname</option>";
-                            }
-                        ?>
-                    </select><br><br>
-                    <label for="task-contributor">Contributor (optional):</label><br>
-                    <select id="task-contributor" name="task-contributor">
-                        <option value=0>Not Assigned</option> <!-- Empty option -->
-                        <?php
-                            // Print options to be displayed in dropdown menu
-                            $result = query("SELECT * FROM Contributors;");
-                            while ($row = $result -> fetch()) {
-                                $cid = $row['ContributorID'];
-                                $cname = $row['ContributorName'];
-                                print "<option value=$cid>$cname</option>";
-                            }
-                        ?>
-                    </select><br><br>
-                    <label for="task-name">Task Name:</label><br>
-                    <input type="text" id="task-name" name="task-name" placeholder="Make blueprint"><br><br>
-                    <label for="task-desc">Description:</label><br>
-                    <textarea type="text" id="task-desc" name="task-desc" placeholder="Make a detailed drawing, paper must be blue. "></textarea><br><br>
-                    <label for="task-status">Status</label><br>
-                    <select id="task-status" name="task-status">
-                        <option value="NEW">NEW: Not Started</option>
-                        <option value="PRO">PRO: In Progress</option>
-                        <option value="COM">COM: Completed</option>
-                    </select><br><br>
-                    <input type="submit" value="Update Task">
-                </form>
-            </div>
-        </div>
-    </body>
-</html>

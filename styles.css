@@ -22,7 +22,7 @@ textarea {
 }
 
 body {
-    background-color: rgb(107, 107, 107);
+    background-color: rgb(100, 100, 100);
 }
 
 .content {
@@ -31,14 +31,10 @@ body {
 
 .box {
     border-radius: 10px;
-    background-color: rgb(224, 224, 224);
+    background-color: rgb(216, 216, 216);
     padding: 10px 10px 10px 10px;
     margin: 10px 10px 10px 10px;
     box-shadow: 3px 3px 3px #474747;
-}
-
-#tasks {
-    height: 100%;
 }
 
 #table-col-name {
@@ -58,6 +54,7 @@ body {
     width: 100%;
     margin-top: 20px;
     margin-bottom: 20px;
+    position: relative;
 }
   
 .row::after {
